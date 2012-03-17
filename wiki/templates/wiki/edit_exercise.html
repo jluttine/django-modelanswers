@@ -1,6 +1,7 @@
 {% block content %}
 
-<form action="/exercises/abc123/edit/" method="post">{% csrf_token %}
+<form action="{% url wiki.views.edit_exercise form.id.value %}" method="post">
+    {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Save" />
 </form>
