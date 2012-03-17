@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" src="{{ MATHJAX_URL }}" ></script>
+
+<p>
+Question is:<br />
+{{ exercise.question }}
+</p>
+
+<p>
+Solution is:<br />
+{{ exercise.solution }}
+</p>
+
+{% endblock %}

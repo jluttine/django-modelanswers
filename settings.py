@@ -28,6 +28,12 @@ DATABASES = {
     }
 }
 
+# Location of the MathJax installation (local or cdn)
+#MATHJAX_URL = 'http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default'
+MATHJAX_URL = 'http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'
+
+#TEMPLATE_CONTEXT_PROCESSORS = ('wiki.context_processors.mathjax_url',)
+
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
