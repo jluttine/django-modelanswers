@@ -5,6 +5,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
+    url(r'^', include('wiki.urls')),
     # Examples:
     # url(r'^$', 'modelanswers.views.home', name='home'),
     # url(r'^modelanswers/', include('modelanswers.foo.urls')),
