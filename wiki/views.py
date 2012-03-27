@@ -1,4 +1,5 @@
 from django.shortcuts import render_to_response, render
+from django.contrib.auth.decorators import login_required
 from django.http import Http404, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.conf import settings
@@ -21,14 +22,17 @@ def show_exercise(request,
         exercise = Exercise.objects.get(pk=exercise_id)
     except Exercise.DoesNotExist:
         raise Http404
-    return render_to_response(template_name,
-                              {'exercise': exercise,
-                               'MATHJAX_URL': MATHJAX_URL})
+    return render(request,
+                  template_name,
+                  {'exercise': exercise,
+                   'MATHJAX_URL': MATHJAX_URL})
 
+@login_required
 def edit_exercise(request,
                   exercise_id,
                   form_class=ExerciseForm,
                   template_name='wiki/edit_exercise.html'):
+    print(request.user)
     # Find the exercise
     try:
         exercise = Exercise.objects.get(pk=exercise_id)

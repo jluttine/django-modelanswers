@@ -6,6 +6,10 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^', include('wiki.urls')),
+
+    url(r'^accounts/', include('accounts.urls')),
+
+                       
     # Examples:
     # url(r'^$', 'modelanswers.views.home', name='home'),
     # url(r'^modelanswers/', include('modelanswers.foo.urls')),

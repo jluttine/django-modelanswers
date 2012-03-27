@@ -1,8 +1,8 @@
 # Default Django settings for modelanswers project.
 
-# DO NOT PUT ANY PRIVATE OR SYSTEM SPECIFIC SETTINGS HERE. USE 
-# ANOTHER SETTINGS FILE FOR THAT (E.G., MY_SETTINGS.PY). THIS
-# FILE CONTAINS THE DEFAULTS.
+# DO NOT PUT ANY PRIVATE OR SYSTEM SPECIFIC SETTINGS HERE. USE ANOTHER
+# SETTINGS FILE FOR THAT (E.G., LOCAL_SETTINGS.PY). THIS FILE CONTAINS
+# THE DEFAULTS.
 
 # A helpful function to avoid writing absolute paths
 import os
@@ -33,6 +33,15 @@ DATABASES = {
 MATHJAX_URL = 'http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'
 
 #TEMPLATE_CONTEXT_PROCESSORS = ('wiki.context_processors.mathjax_url',)
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.core.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.request",
+)
+
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -133,6 +142,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'wiki',
+    'accounts',
+    'registration',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
@@ -161,3 +172,11 @@ LOGGING = {
         },
     }
 }
+
+# Load local settings. You can overwrite these default settings in
+# local_settings.py.
+try:
+    execfile(path('local_settings.py'))
+except IOError:
+    pass
+

@@ -7,6 +7,9 @@
 
 <body>
     <div id="sidebar">
+        <a href="{% url django.contrib.auth.views.login %}?next={{ request.path }}">Login</a>
+        <a href="{% url django.contrib.auth.views.login %}">Login2</a>
+
         {% block sidebar %}
         <ul>
             <li><a href="/">Home</a></li>
