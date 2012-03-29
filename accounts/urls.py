@@ -3,7 +3,7 @@ from django.conf.urls.defaults import patterns, include, url
 
 urlpatterns = patterns('',
     url(r'^', include('registration.urls')),
-    url(r'^profile/$', 'accounts.views.profile'),
+    url(r'^profile/$', 'accounts.views.profile', name='auth_profile'),
 
     # Account management
 #    url(r'^register/$', 'accounts.views.register'),

@@ -14,7 +14,6 @@ TEMPLATE_DEBUG = DEBUG
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
-
 MANAGERS = ADMINS
 
 DATABASES = {
@@ -31,6 +30,18 @@ DATABASES = {
 # Location of the MathJax installation (local or cdn)
 #MATHJAX_URL = 'http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default'
 MATHJAX_URL = 'http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'
+
+# Registration
+ACCOUNT_ACTIVATION_DAYS = 1
+
+# Overwrite these in local_settings.py
+## EMAIL_HOST = 'smtp.example.com'
+## EMAIL_PORT = 25
+## EMAIL_HOST_USER = 'username'
+## EMAIL_HOST_PASSWORD = 'password'
+## EMAIL_USE_TLS = False
+## EMAIL_SUBJECT_PREFIX = '[Model Answers] '
+## DEFAULT_FROM_EMAIL = 'noreply@modelanswers.net'
 
 #TEMPLATE_CONTEXT_PROCESSORS = ('wiki.context_processors.mathjax_url',)
 
@@ -107,8 +118,8 @@ STATICFILES_FINDERS = (
 
 # Make this unique, and don't share it with anybody.
 # You can, for instance, overwrite this variable in your own
-# my_settings.py. Set to something long and messy.
-SECRET_KEY = 'CHANGETHIS! kwofmk5SDBj$&*D!@(fdnse&fcvjsdw>3ujf;*hfd)*sfj'
+# local_settings.py. Set to something long and messy.
+SECRET_KEY = 'kwofmk5SDBj$&*D!@(fdnse&fcvjsdw>3ujf;*hfd)*sfj'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (

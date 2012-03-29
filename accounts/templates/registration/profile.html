@@ -1,8 +1,15 @@
-{% extends "base.html" %}
-{% load url from future %}
-
+{% extends "registration/registration_base.html" %}
+{% block title %}Login{% endblock %}
 {% block content %}
 
-You are {{ user }}
+<h1>Welcome {{ user.username }}!</h1>
+<p> You can either <a href="{% url auth_logout %}">logout</a> or 
+  <a href="{% url auth_password_reset %}">reset password</a> or
+  <a href="{% url auth_password_change %}">change password</a>
+</p>
+
+Maybe changing email would be ok too?
+
+And deleting account? It would make the account inactive but not remove from the database.
 
 {% endblock %}

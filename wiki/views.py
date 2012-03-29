@@ -12,6 +12,7 @@ from django.contrib.auth.forms import UserCreationForm
 #from django.shortcuts import render_to_response
 
 
+
 # Some conventions:
 # http://ericholscher.com/projects/django-conventions/app/
 
