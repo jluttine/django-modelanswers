@@ -1,45 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html>
+
 <head>
-    <link rel="stylesheet" href="style.css" />
-    <title>{% block title %}Model answers{% endblock %}</title>
+  <link rel="stylesheet" href="style.css" />
+  <title>{% block title %}Model answers{% endblock %}</title>
 </head>
 
 <body>
-    <div id="sidebar">
-        {% if user.is_authenticated %}
-	Logged in as <a href="{% url auth_profile %}">{{ user }}</a>.
-	<a href="{% url auth_logout %}">Logout</a>
-	{# <a href="{% url auth_logout %}?next={{ request.path }}">Logout</a> #}
-        {% else %}
-        <a href="{% url auth_login %}">Login</a>
-        {# <a href="{% url auth_login %}?next={{ request.path }}">Login</a> #}
-        {% endif %}
 
-        {% block sidebar %}
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/exercises/">Exercises</a></li>
-        </ul>
-        {% endblock %}
-    </div>
+  <header>
+    {% if user.is_authenticated %}
+      Logged in as <a href="{% url auth_profile %}">{{ user }}</a>.
+      <a href="{% url auth_logout %}">Logout</a>
+    {% else %}
+      <a href="{% url auth_login %}">Login</a>
+    {% endif %}
+  </header>
 
-    {% block messages %}
+  <aside>
+    {% block sidebar %}
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/exercises/">Exercises</a></li>
+      </ul>
+    {% endblock %}
+  </aside>
+
+  {% block messages %}
     {% if messages %}
-    <div id="messages" class="container_12">
-      <div class="grid_12">
+      <mark>
         <ul>
           {% for msg in messages %}
-          <li class="{{ msg.tags }}">{{ msg|safe }}</li>
+            <li class="{{ msg.tags }}">{{ msg|safe }}</li>
           {% endfor %}
         </ul>
-      </div>
-    </div>
+      </mark>
     {% endif %}
-    {% endblock %}
+  {% endblock %}
 
-    <div id="content">
-        {% block content %}{% endblock %}
-    </div>
+  <section>
+    {% block content %}{% endblock %}
+  </section>
+
 </body>
+
 </html>
