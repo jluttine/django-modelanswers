@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<a href="{% url show_page page.pk %}">View</a>
+<a href="{% url edit_page page.pk %}">Edit</a>
+History
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" src="{{ MATHJAX_URL }}" ></script>
+
+
+<h1>Title: {{ page }}</h1>
+
+{% for revision in revisions %}
+<p><a href="{% url show_revision page.pk revision.pk %}">{{ revision }}</a></p>
+{% endfor %}
+
+
+{% endblock %}

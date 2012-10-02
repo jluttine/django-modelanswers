@@ -1,9 +1,0 @@
-{% extends "base.html" %}
-
-{% block content %}
-
-{% for exercise in exercise_list %}
-    <p><a href="{% url wiki.views.show_exercise exercise.id %}">{{ exercise.id }}</a></p>
-{% endfor %}
-
-{% endblock %}

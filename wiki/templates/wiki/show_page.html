@@ -2,19 +2,25 @@
 
 {% block content %}
 
+View
+<a href="{% url edit_page page.pk %}">Edit</a>
+<a href="{% url show_history page.pk %}">History</a>
+
+
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
 </script>
 <script type="text/javascript" src="{{ MATHJAX_URL }}" ></script>
 
+<h1>Title: {{ page }}</h1>
+
 <p>
-Question is:<br />
-{{ exercise.question }}
+{{ revision }}
 </p>
 
 <p>
-Solution is:<br />
-{{ exercise.solution }}
+{{ revision.content1 }}
+{{ revision.content2 }}
 </p>
 
 {% endblock %}

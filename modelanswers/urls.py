@@ -5,7 +5,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^', include('wiki.urls')),
+    url(r'^exercises/', include('wiki.urls')),
 
     url(r'^accounts/', include('accounts.urls')),
 

@@ -1,0 +1,16 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<a href="{% url edit_page page.pk %}">Edit</a>
+<a href="{% url show_history page.pk %}">History</a>
+
+<h1>Title: {{ page }}</h1>
+
+{% for revision in revisions %}
+<p>{{ revision }}</p>
+{% endfor %}
+
+
+{% endblock %}

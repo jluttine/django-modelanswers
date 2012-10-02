@@ -1,0 +1,18 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<a href="{% url show_page page.pk %}">View</a>
+Edit
+<a href="{% url show_history page.pk %}">History</a>
+
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" name="action" value="cancel">Cancel</button>
+    <button type="submit" name="action" value="preview">Preview</button>
+    <button type="submit" name="action" value="save">Save</button>
+</form>
+
+{% endblock %}
