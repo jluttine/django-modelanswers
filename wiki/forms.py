@@ -64,7 +64,7 @@ class PageEditForm(forms.ModelForm):
         base_revision = self.cleaned_data.get('base_revision')
         last_revision = self.page.last_revision()
         if base_revision != last_revision:
-            content = self.cleaned_data['content']
+            #content = self.cleaned_data['content']
             rebase_success = False
 
             self.cleaned_data = self.model.rebase(self.cleaned_data,

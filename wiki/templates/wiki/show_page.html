@@ -12,15 +12,10 @@ View
 </script>
 <script type="text/javascript" src="{{ MATHJAX_URL }}" ></script>
 
-<h1>Title: {{ page }}</h1>
+<h1>{{ revision.title }}</h1>
 
 <p>
-{{ revision }}
-</p>
-
-<p>
-{{ revision.content1 }}
-{{ revision.content2 }}
+{{ revision.content }}
 </p>
 
 {% endblock %}
