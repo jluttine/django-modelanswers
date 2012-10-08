@@ -13,11 +13,42 @@ History
 <script type="text/javascript" src="{{ MATHJAX_URL }}" ></script>
 
 
-<h1>Title: {{ page }}</h1>
+<h1>History: {{ page.last_revision }}</h1>
 
-{% for revision in revisions %}
-<p><a href="{% url show_revision page.pk revision.pk %}">{{ revision }}</a></p>
-{% endfor %}
+<table>
 
+  <thead>
+    <tr>
+      <th>
+        Author
+      </th>
+      <th>
+        Time
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for revision in revisions %}
+      <tr>
+        <td>
+          <p>
+            {# <a href="{% url auth_profile %}"> #}
+              {{ revision.author }}
+            {# </a> #}
+          </p>
+        </td>
+        <td>
+          <p>
+            <a href="{% url show_revision page.pk revision.pk %}">
+              {{ revision.created }}
+            </a>
+          </p>
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+
+</table>
 
 {% endblock %}

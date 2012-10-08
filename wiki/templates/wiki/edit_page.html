@@ -7,6 +7,8 @@
 Edit
 <a href="{% url show_history page.pk %}">History</a>
 
+<h1>Edit: {{ page.last_revision }}</h1>
+
 <form action="" method="post">
     {% csrf_token %}
     {{ form.as_p }}

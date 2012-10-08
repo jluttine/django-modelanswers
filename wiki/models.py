@@ -34,7 +34,7 @@ class Language(models.Model):
 # Class for the exercise
 class Page(models.Model, Versioned):
     def __unicode__(self):
-        return str(self.pk)
+        return unicode(self.pk)
 
 
 # Page in a specific language.
@@ -82,3 +82,5 @@ class PageRevision(Revision):
             super(PageRevision, self).__init__(*args,
                                                **kwargs)
             
+    def __unicode__(self):
+        return unicode(self.title)
