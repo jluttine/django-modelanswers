@@ -25,6 +25,9 @@ History
       <th>
         Time
       </th>
+      <th>
+        Description
+      </th>
     </tr>
   </thead>
 
@@ -32,18 +35,17 @@ History
     {% for revision in revisions %}
       <tr>
         <td>
-          <p>
-            {# <a href="{% url auth_profile %}"> #}
-              {{ revision.author }}
-            {# </a> #}
-          </p>
+          {# <a href="{% url auth_profile %}"> #}
+            {{ revision.author }}
+          {# </a> #}
         </td>
         <td>
-          <p>
-            <a href="{% url show_revision page.pk revision.pk %}">
-              {{ revision.created }}
-            </a>
-          </p>
+          <a href="{% url show_revision page.pk revision.pk %}">
+            {{ revision.created }}
+          </a>
+        </td>
+        <td>
+          {{ revision.description }}
         </td>
       </tr>
     {% endfor %}
