@@ -21,8 +21,8 @@
   <aside>
     {% block sidebar %}
       <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/exercises/">Exercises</a></li>
+        <li><a href="{% url index %}">Home</a></li>
+        <li><a href="{% url exercises:list %}">Exercises</a></li>
       </ul>
     {% endblock %}
   </aside>

@@ -5,6 +5,9 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
+
+    url(r'^$', 'modelanswers.views.index', name='index'),
+
     url(r'^wiki/', include('wiki.urls')),
 
     url(r'^exercises/', include('exercises.urls')),
