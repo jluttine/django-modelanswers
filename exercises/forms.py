@@ -2,7 +2,6 @@ from django import forms
 from django.utils.translation import ugettext as _
 from diff_match_patch import diff_match_patch
 from . import models
-from wiki import utils
 
 class ExerciseCreateForm(forms.ModelForm):
 
