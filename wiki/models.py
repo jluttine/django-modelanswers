@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 import utils
 
-class Versioned(object):
+class Versioned(models.Model):
 
     def history(self):
         return self.revisions.order_by('-created')
@@ -24,31 +24,9 @@ class Versioned(object):
         if last:
              return last.author
 
-
-
-class Language(models.Model):
-    language = models.CharField(max_length=30, primary_key=True)
-    def __unicode__(self):
-        return self.language
-
-# Class for the exercise
-class Page(models.Model, Versioned):
-    def __unicode__(self):
-        return unicode(self.pk)
-
-
-# Page in a specific language.
-class PageLocal(models.Model, Versioned):
-    language = models.ForeignKey(Language)
-    page = models.ForeignKey(Page)
-    def __unicode__(self):
-        return u"%s (%s)" % (self.page, self.language)
-
 # A revision of the page content
 # For now, ignore the language stuff.
 class Revision(models.Model):
-    page = models.ForeignKey(Page, 
-                             related_name='revisions')
     created = models.DateTimeField(_("Created"), 
                                    auto_now_add=True)
     author = models.ForeignKey(User, 
@@ -66,7 +44,28 @@ class Revision(models.Model):
         abstract = True
         ordering = ('-created',)
 
+
+
+## class Language(models.Model):
+##     language = models.CharField(max_length=30, primary_key=True)
+##     def __unicode__(self):
+##         return self.language
+
+# Class for the exercise
+class Page(Versioned):
+    pass
+
+
+# Page in a specific language.
+## class PageLocal(models.Model, Versioned):
+##     language = models.ForeignKey(Language)
+##     page = models.ForeignKey(Page)
+##     def __unicode__(self):
+##         return u"%s (%s)" % (self.page, self.language)
+
 class PageRevision(Revision):
+    page = models.ForeignKey(Page, 
+                             related_name='revisions')
     title = models.CharField(max_length=50)
     content = models.TextField()
     def __init__(self, *args, **kwargs):

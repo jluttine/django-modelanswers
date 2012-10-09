@@ -3,7 +3,7 @@
 {% block content %}
 
 {% for page in page_list %}
-    <p><a href="{% url show page.pk %}">{{ page.last_revision }}</a></p>
+    <p><a href="{% url exercises:show page.pk %}">{{ page }}</a></p>
 {% endfor %}
 
 {% endblock %}

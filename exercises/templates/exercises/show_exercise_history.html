@@ -2,8 +2,8 @@
 
 {% block content %}
 
-<a href="{% url show page.pk %}">View</a>
-<a href="{% url edit page.pk %}">Edit</a>
+<a href="{% url exercises:show page.pk %}">View</a>
+<a href="{% url exercises:edit page.pk %}">Edit</a>
 History
 
 
@@ -13,7 +13,7 @@ History
 <script type="text/javascript" src="{{ MATHJAX_URL }}" ></script>
 
 
-<h1>History: {{ page.last_revision }}</h1>
+<h1>History: {{ page }}</h1>
 
 <table>
 
@@ -40,7 +40,7 @@ History
           {# </a> #}
         </td>
         <td>
-          <a href="{% url show_revision page.pk revision.pk %}">
+          <a href="{% url exercises:show_revision page.pk revision.pk %}">
             {{ revision.created }}
           </a>
         </td>

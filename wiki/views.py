@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import Http404, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.conf import settings
-from wiki.models import Page, PageLocal, PageRevision
+from wiki.models import Page, PageRevision
 from wiki.forms import PageEditForm, PageCreateForm
 from django.contrib import messages
 
@@ -12,6 +12,22 @@ from django.contrib.auth.forms import UserCreationForm
 #from django.http import HttpResponseRedirect
 #from django.shortcuts import render_to_response
 
+class default:
+    class classes:
+        Versioned = Page
+        Revision = PageRevision
+        EditForm = PageEditForm
+        CreateForm = PageCreateForm
+    class templates:
+        show = 'wiki/show_page.html'
+        add = 'wiki/add_page.html'
+        edit = 'wiki/edit_page.html'
+        list = 'wiki/list_pages.html'
+        history = 'wiki/show_history.html'
+        delete = 'wiki/delete_page.html'
+    class urls:
+        show = 'show_page'
+        list = 'list_pages'
 
 
 # Some conventions:
@@ -26,36 +42,36 @@ MATHJAX_URL = getattr(settings,
 def show_page(request,
               primary_key,
               revision_pk=None,
-              page_class=Page,
-              revision_class=PageRevision,
-              template_name='wiki/show_page.html'):
+              classes=default.classes,
+              templates=default.templates,
+              urls=default.urls):
     try:
-        page = page_class.objects.get(pk=primary_key)
-    except page_class.DoesNotExist:
+        page = classes.Versioned.objects.get(pk=primary_key)
+    except classes.Versioned.DoesNotExist:
         raise Http404 # page not found
 
     if revision_pk:
         try:
             revision = page.revisions.get(pk=revision_pk)
-        except revision_class.DoesNotExist:
+        except classes.Revision.DoesNotExist:
             return HttpResponseNotFound()
         if revision != page.last_revision():
             messages.info(request,
                           """The version you are viewing is not the
-                          latest one, but represents an older revision
-                          of this page, which may have been
-                          significantly modified. If it is not what
-                          you intended to view, <a
-                          href=\"%(url)s\">proceed to the latest
-                          version</a>.""" % {
-                              'url': reverse('show_page', kwargs={'primary_key': primary_key})
+                          latest one, but represents an older
+                          revision, which may have been significantly
+                          modified. If it is not what you intended to
+                          view, <a href=\"%(url)s\">proceed to the
+                          latest version</a>.""" % {
+                              'url': reverse(urls.show, 
+                                             kwargs={'primary_key': primary_key})
                               })
 
 
     else:
         revision = page.last_revision()
     return render(request,
-                  template_name,
+                  templates.show,
                   {
                       'page': page,
                       'revision': revision,
@@ -65,14 +81,13 @@ def show_page(request,
 @login_required
 def edit_page(request,
               primary_key,
-              page_class=Page,
-              revision_class=PageRevision,
-              form_class=PageEditForm,
-              template_name='wiki/edit_page.html'):
+              classes=default.classes,
+              templates=default.templates,
+              urls=default.urls):
     # Find the exercise
     try:
-        page = page_class.objects.get(pk=primary_key)
-    except page_class.DoesNotExist:
+        page = classes.Versioned.objects.get(pk=primary_key)
+    except classes.Versioned.DoesNotExist:
         raise Http404 # page does not exist
 
     ## # Would like to have like this:
@@ -84,19 +99,19 @@ def edit_page(request,
 
     # Initialize edit
     last_revision = page.last_revision()
-    revision = revision_class(page=page,
-                              author=request.user,
-                              base_revision=last_revision)
-    form = form_class(data=request.POST or None,
-                      instance=revision,
-                      page=page)
+    revision = classes.Revision(page=page,
+                                author=request.user,
+                                base_revision=last_revision)
+    form = classes.EditForm(data=request.POST or None,
+                            instance=revision,
+                            page=page)
     
     if request.method == 'POST':
         # Handle posted edit
 
         # Don't save, just return to the page
         if request.POST.get('action') == 'cancel':
-            return HttpResponseRedirect(reverse('show_page', 
+            return HttpResponseRedirect(reverse(urls.show, 
                                                 args=(page.pk,)))
             
 
@@ -111,11 +126,11 @@ def edit_page(request,
                 # Save the edit (could also request for a preview
                 # here)
                 form.save()
-                return HttpResponseRedirect(reverse('show_page', 
+                return HttpResponseRedirect(reverse(urls.show, 
                                                     args=(page.pk,)))
         
     return render(request,
-                  template_name,
+                  templates.edit,
                   {
                       'page': page,
                       'form': form,
@@ -125,15 +140,16 @@ def edit_page(request,
 @login_required
 def delete_page(request,
                 primary_key,
-                page_class=Page,
-                template_name='wiki/show_page.html'):
+                classes=default.classes,
+                templates=default.templates,
+                urls=default.urls):
 
     try:
-        page = page_class.objects.get(pk=exercise_id)
-    except page_class.DoesNotExist:
+        page = classes.Versioned.objects.get(pk=exercise_id)
+    except classes.Versioned.DoesNotExist:
         raise Http404
     return render(request,
-                  template_name,
+                  templates.delete,
                   {
                       'page': page,
                       'MATHJAX_URL': MATHJAX_URL,
@@ -142,53 +158,53 @@ def delete_page(request,
 
 @login_required
 def add_page(request,
-             page_class=Page,
-             revision_class=PageRevision,
-             form_class=PageCreateForm,
-             template_name='wiki/add_page.html'):
+             classes=default.classes,
+             templates=default.templates,
+             urls=default.urls):
 
     # Create a new page.
-    page = page_class()
+    page = classes.Versioned()
     # Create a new revision for the page.
-    revision = revision_class(page=page,
-                              author=request.user)
+    revision = classes.Revision(page=page,
+                                author=request.user)
     # Create the form to edit the contents.
-    form = form_class(data=request.POST or None,
-                      instance=revision,
-                      page=page)
+    form = classes.CreateForm(data=request.POST or None,
+                              instance=revision,
+                              page=page)
 
     if request.method == 'POST':
         # Handle posted edit
 
         # Don't save, just return to the page
         if request.POST.get('action') == 'cancel':
-            return HttpResponseRedirect(reverse('list_pages'))
+            return HttpResponseRedirect(reverse(urls.list))
             
         if form.is_valid():
             # Save and show the page
             form.save()
             primary_key = page.pk
-            return HttpResponseRedirect(reverse('show_page', 
+            return HttpResponseRedirect(reverse(urls.show, 
                                                 args=(primary_key,)))
         
     return render(request,
-                  template_name,
+                  templates.add,
                   {
                       'form': form,
                   })
 
 def show_history(request,
                  primary_key,
-                 page_class=Page,
-                 template_name='wiki/show_history.html'):
+                 classes=default.classes,
+                 templates=default.templates,
+                 urls=default.urls):
     
     try:
-        page = page_class.objects.get(pk=primary_key)
-    except page_class.DoesNotExist:
+        page = classes.Versioned.objects.get(pk=primary_key)
+    except classes.Versioned.DoesNotExist:
         raise Http404 # page not found
 
     return render(request,
-                  template_name,
+                  templates.history,
                   {
                       'page': page,
                       'revisions': page.history,
@@ -196,13 +212,14 @@ def show_history(request,
 
 
 def list_pages(request,
-               page_class=Page,
-               template_name='wiki/list_pages.html'):
+               classes=default.classes,
+               templates=default.templates,
+               urls=default.urls):
 
-    page_list = page_class.objects.all()
+    page_list = classes.Versioned.objects.all()
     
     return render(request,
-                  template_name,
+                  templates.list,
                   {
                       'page_list': page_list,
                   })

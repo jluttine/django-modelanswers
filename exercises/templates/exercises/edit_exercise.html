@@ -3,11 +3,11 @@
 
 {% block content %}
 
-<a href="{% url show page.pk %}">View</a>
+<a href="{% url exercises:show page.pk %}">View</a>
 Edit
-<a href="{% url history page.pk %}">History</a>
+<a href="{% url exercises:history page.pk %}">History</a>
 
-<h1>Edit: {{ page.last_revision }}</h1>
+<h1>Edit: {{ page }}</h1>
 
 <form action="" method="post">
     {% csrf_token %}

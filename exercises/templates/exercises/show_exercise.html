@@ -3,8 +3,8 @@
 {% block content %}
 
 View
-<a href="{% url edit page.pk %}">Edit</a>
-<a href="{% url history page.pk %}">History</a>
+<a href="{% url exercises:edit page.pk %}">Edit</a>
+<a href="{% url exercises:history page.pk %}">History</a>
 
 
 <script type="text/x-mathjax-config">
@@ -12,10 +12,12 @@ View
 </script>
 <script type="text/javascript" src="{{ MATHJAX_URL }}" ></script>
 
-<h1>{{ revision.title }}</h1>
+<h1>Tehtävä</h1>
 
-<p>
-{{ revision.content }}
-</p>
+{{ revision.question }}
+
+<h1>Ratkaisu</h1>
+
+{{ revision.solution }}
 
 {% endblock %}

@@ -3,8 +3,8 @@
 
 {% block content %}
 
-<a href="{% url edit page.pk %}">Edit</a>
-<a href="{% url history page.pk %}">History</a>
+<a href="{% url exercises:edit page.pk %}">Edit</a>
+<a href="{% url exercises:history page.pk %}">History</a>
 
 <h1>Title: {{ page }}</h1>
 
