@@ -2,6 +2,8 @@
 
 {% block content %}
 
+<a href="{% url exercises:add %}">Lisää harjoitus</a>
+
 {% for page in page_list %}
     <p><a href="{% url exercises:show page.pk %}">{{ page }}</a></p>
 {% endfor %}
