@@ -1,5 +1,47 @@
 [
   {
+    "pk": 1, 
+    "model": "wiki.versioned", 
+    "fields": {}
+  }, 
+  {
+    "pk": 2, 
+    "model": "wiki.versioned", 
+    "fields": {}
+  }, 
+  {
+    "pk": 3, 
+    "model": "wiki.versioned", 
+    "fields": {}
+  }, 
+  {
+    "pk": 4, 
+    "model": "wiki.versioned", 
+    "fields": {}
+  }, 
+  {
+    "pk": 5, 
+    "model": "wiki.versioned", 
+    "fields": {}
+  }, 
+  {
+    "pk": 2, 
+    "model": "wiki.page", 
+    "fields": {}
+  }, 
+  {
+    "pk": 1, 
+    "model": "wiki.pagerevision", 
+    "fields": {
+      "description": "testailen", 
+      "title": "otsikko", 
+      "author": 1, 
+      "created": "2012-10-10T00:13:32.879", 
+      "content": "sis\u00e4lt\u00f6", 
+      "page": 2
+    }
+  }, 
+  {
     "pk": 4, 
     "model": "exercises.exercise", 
     "fields": {}
