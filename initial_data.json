@@ -1,34 +1,48 @@
 [
   {
-    "pk": 1, 
-    "model": "wiki.versioned", 
+    "pk": 4, 
+    "model": "exercises.exercise", 
     "fields": {}
   }, 
   {
-    "pk": 2, 
-    "model": "wiki.versioned", 
+    "pk": 5, 
+    "model": "exercises.exercise", 
     "fields": {}
   }, 
   {
     "pk": 3, 
-    "model": "wiki.versioned", 
-    "fields": {}
+    "model": "exercises.exerciserevision", 
+    "fields": {
+      "description": "Eka vedos", 
+      "author": 1, 
+      "created": "2012-10-09T19:39:00.370", 
+      "question": "Esit\u00e4 luku $\\sqrt{2}$ murtolukuna.", 
+      "solution": "Koska\r\n\\[\r\n\\sqrt{2}^2=2\r\n\\]\r\nseuraa, ett\u00e4\r\n\\[\r\n\\sqrt{2}=\\frac{1}{2}.\r\n\\]", 
+      "page": 5
+    }
   }, 
   {
     "pk": 2, 
-    "model": "wiki.page", 
-    "fields": {}
+    "model": "exercises.exerciserevision", 
+    "fields": {
+      "description": "Lis\u00e4\u00e4 kommentti", 
+      "author": 1, 
+      "created": "2012-10-09T19:36:23.524", 
+      "question": "Paljonko on $1+1$?", 
+      "solution": "Selv\u00e4sti n\u00e4hd\u00e4\u00e4n ett\u00e4\r\n\\[\r\n1+1=11.\r\n\\]\r\nTodistus j\u00e4tet\u00e4\u00e4n kotiteht\u00e4v\u00e4ksi. T\u00e4m\u00e4 turha lause on lis\u00e4tty my\u00f6hemmin.", 
+      "page": 4
+    }
   }, 
   {
     "pk": 1, 
-    "model": "wiki.pagerevision", 
+    "model": "exercises.exerciserevision", 
     "fields": {
-      "description": "testailen", 
-      "title": "otsikko", 
+      "description": "Ensimm\u00e4inen versio", 
       "author": 1, 
-      "created": "2012-10-10T00:13:32.879", 
-      "content": "sis\u00e4lt\u00f6", 
-      "page": 2
+      "created": "2012-10-09T19:35:25.823", 
+      "question": "Paljonko on $1+1$?", 
+      "solution": "Selv\u00e4sti n\u00e4hd\u00e4\u00e4n ett\u00e4\r\n\\[\r\n1+1=11.\r\n\\]\r\nTodistus j\u00e4tet\u00e4\u00e4n kotiteht\u00e4v\u00e4ksi.", 
+      "page": 4
     }
   }
 ]
