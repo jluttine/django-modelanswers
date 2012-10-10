@@ -78,12 +78,13 @@ def show_page(request,
                       'MATHJAX_URL': MATHJAX_URL,
                   })
 
-@login_required
+@login_required()
 def edit_page(request,
               primary_key,
               classes=default.classes,
               templates=default.templates,
               urls=default.urls):
+
     # Find the exercise
     try:
         page = classes.Versioned.objects.get(pk=primary_key)

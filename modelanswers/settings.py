@@ -34,6 +34,11 @@ MATHJAX_URL = 'http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-M
 # Registration
 ACCOUNT_ACTIVATION_DAYS = 1
 
+# You may want to change these in local settings
+# NOTE: In Django 1.5 these can be changed to views! \o/
+LOGIN_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = '/accounts/profile/'
+
 # Overwrite these in local_settings.py
 ## EMAIL_HOST = 'smtp.example.com'
 ## EMAIL_PORT = 25
